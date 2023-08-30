@@ -34,7 +34,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login(Request $request)
+    public function login(Request $request) :Response
     {
         $credentials = $request->validate([
             'email' => 'required|email|string|exists:users,email',
@@ -59,6 +59,16 @@ class AuthController extends Controller
         return response([
             'user' => $user,
             'token' => $token
+        ]);
+    }
+    
+    public function logout() :Response
+    {
+        $user = Auth::user();
+        $user->currentAccessToken()->delete();
+
+        return response([
+            'success' => true
         ]);
     }
 }

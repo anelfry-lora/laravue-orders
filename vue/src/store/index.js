@@ -10,6 +10,13 @@ const store = createStore({
     },
     getters: {},
     actions: {
+        logout({ commit }) {
+            return axiosClient.post('/logout')
+                .then(res => {
+                    commit('logout')
+                    return res;
+                })
+        },
         register({ commit }, user) {
             return axiosClient.post('/register', user)
                 .then(({ data }) => {
@@ -27,8 +34,9 @@ const store = createStore({
     },
     mutations: {
         logout: (state) => {
-            state.user.data = {};
             state.user.token = null;
+            state.user.data = {}
+            sessionStorage.removeItem('TOKEN');
         },
         setUser: (state, userData) => {
             state.user.token = userData.token
