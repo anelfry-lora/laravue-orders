@@ -2,6 +2,7 @@
 import { LockClosedIcon } from '@heroicons/vue/20/solid'
 import InputLabel from '../../components/InputLabel.vue';
 import Input from '../../components/Input.vue';
+import Alert from '../../components/Alert.vue';
 import PrimaryButton from '../../components/PrimaryButton.vue';
 import store from "../../store";
 import { useRouter } from 'vue-router'
@@ -55,29 +56,49 @@ const register = (ev) => {
     </div>
 
     <div class="sm:mx-auto sm:w-full sm:max-w-sm mt-10">
-        <form class="space-y-2" method="POST" @submit="register">
-            <div class="md:grid-cols-2 md:gap-4 grid">
+        <Alert v-if="Object.keys(errors).length">
+            <div v-if="(!!errors) && (errors.constructor === Object)">
+                <ul v-for="(field, i) of Object.keys(errors)" :key="i" lass="list-inside">
+                    <li v-for="(error, ind) of errors[field] || []" :key="ind">
+                        * {{ error }}
+                    </li>
+                </ul>
+            </div>
+            <div v-else>
+                {{ errors }}
+            </div>
+            <span @click="errors = ''"
+                class="w-8 h-8 flex items-center justify-center rounded-full transition-color cursor-pointer hover:bg-[rgba(0,0,0,0.2)]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </span>
+        </Alert>
+        <form class="space-y-2" @submit="register">
+            <div class="md:grid-cols-2 md:gap-4 grid mt-6">
                 <div class="group relative z-0 w-full space-y-2">
                     <InputLabel for="name" value="First Name" />
-                    <Input id="name" type="text" autofocus autocomplete="first-name" v-model="user.name"/>
+                    <Input id="name" type="text" autofocus autocomplete="first-name" v-model="user.name" />
                 </div>
                 <div class="group relative z-0 w-full space-y-2">
                     <InputLabel for="last_name" value="Last Name" />
-                    <Input id="last_name" type="text" autocomplete="last_name" v-model="user.last_name"/>
+                    <Input id="last_name" type="text" autocomplete="last_name" v-model="user.last_name" />
                 </div>
             </div>
             <div>
                 <InputLabel for="email" value="Email address" />
-                <Input id="email" type="email" class="block w-full" autocomplete="email" v-model="user.email"/>
+                <Input id="email" type="email" class="block w-full" autocomplete="email" v-model="user.email" />
             </div>
             <div>
                 <InputLabel for="password" value="Password" />
-                <Input id="password" type="password" class="block w-full" autocomplete="current-password" v-model="user.password"/>
+                <Input id="password" type="password" class="block w-full" autocomplete="current-password"
+                    v-model="user.password" />
             </div>
-            <div>
+            <div class="pb-4">
                 <InputLabel for="password_confirmation" value="Password Confirmation" />
                 <Input id="password_confirmation" type="password" class="block w-full"
-                    autocomplete="current-password_confirmation" v-model="user.password_confirmation"/>
+                    autocomplete="current-password_confirmation" v-model="user.password_confirmation" />
             </div>
             <div>
                 <PrimaryButton class="group relative flex justify-center w-full" :disabled="loading"
