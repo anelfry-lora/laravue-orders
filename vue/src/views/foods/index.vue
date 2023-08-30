@@ -1,12 +1,10 @@
 <script setup>
-import Header from '../../components/Header.vue';
-import MainContent from '../../components/MainContent.vue';
+import Page from '../layouts/page.vue';
 </script>
 
 <template>
-    <Header> List Foods </Header>
-    <MainContent>
-        
-    </MainContent>
+    <Page title="List Foots"> 
+        This is content
+    </Page>
 </template>
   
