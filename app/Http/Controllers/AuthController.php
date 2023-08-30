@@ -2,18 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Http\Requests\CreateUserRequest;
+use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
-    public function register(CreateUserRequest $request)
+    public function register(Request $request): Response
     {
-        $data = $request->validate();
+        $data = $request->validate([
+            'name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email|string|unique:users,email',
+            'password' => ['required',  'confirmed', Password::min(8)->mixedCase()->numbers()],
+        ]);
 
         $user = User::create([
             'name' => $data['name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
