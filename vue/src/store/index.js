@@ -14,6 +14,16 @@ const store = createStore({
     },
     getters: {},
     actions: {
+        getFoods({ commit }, { url = null } = {}) {
+            url = url || '/foods'
+            commit('setFoodsLoading', true)
+            return axiosClient.get(url)
+                .then((res) => {
+                    commit('setFoodsLoading', false)
+                    commit('setFoods', res.data);
+                    return res;
+                });
+        },
         logout({ commit }) {
             return axiosClient.post('/logout')
                 .then(res => {
@@ -37,6 +47,12 @@ const store = createStore({
         },
     },
     mutations: {
+        setFoodsLoading: (state, loading) => {
+            state.foods.loading = loading;
+        },
+        setFoods: (state, foods) => {
+            state.foods.data = foods.data;
+        },
         logout: (state) => {
             state.user.token = null;
             state.user.data = {}

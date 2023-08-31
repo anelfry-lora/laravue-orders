@@ -16,7 +16,7 @@ const props = defineProps({
                 <h4 class="text-2xl font-semibold tracking-tight text-gray-900">
                     {{ food.name }}
                 </h4>
-                <p class="mt-4 mb-3 text-lg font-normal text-gray-700">
+                <p class="h-16 mt-4 mb-3 text-lg font-normal text-gray-700">
                     {{ food.description }}
                 </p>
             </div>

@@ -24,8 +24,8 @@ class FoodFactory extends Factory
         $fakerName = $faker->meatName();
         return [
             'name' => $fakerName,
-            'image' => $faker->imageUrl(640,480, 'name='.$fakerName),
-            'description' => $faker->text(),
+            'image' => $faker->imageUrl(640,480, ''.$fakerName),
+            'description' => $faker->text(50),
             'status' => 1
         ];
     }

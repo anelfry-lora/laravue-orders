@@ -21,6 +21,7 @@ class FoodResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'status' => $this->status,
+            'image' => $this->image,
             'description' => $this->description,
             'created_at' => (new DateTime($this->created_at,))->format('h:i:s a. d/M/Y'),
             'updated_at' => (new DateTime($this->updated_at,))->format('h:i:s a. d/M/Y'),
