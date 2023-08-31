@@ -16,7 +16,7 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $foods = Food::where('status', 1)->paginate();
+        $foods = Food::where('status', 1)->paginate(15);
         
         return FoodResource::collection($foods);
     }

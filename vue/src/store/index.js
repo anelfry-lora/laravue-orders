@@ -9,6 +9,7 @@ const store = createStore({
         },
         foods: {
             loading: false,
+            links: [],
             data: {}
         },
     },
@@ -51,6 +52,7 @@ const store = createStore({
             state.foods.loading = loading;
         },
         setFoods: (state, foods) => {
+            state.foods.links = foods.meta.links;
             state.foods.data = foods.data;
         },
         logout: (state) => {

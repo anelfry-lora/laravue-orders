@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import { defineProps } from 'vue';
+
+const props = defineProps({
     value: String,
 });
 </script>
