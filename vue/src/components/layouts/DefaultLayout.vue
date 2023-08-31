@@ -11,8 +11,7 @@ const user = computed(() => store.state.user.data);
 
 const navigation = [
     { name: 'Foods', to: { name: "Foods" } },
-    { name: 'Recommended', to: { name: "" } },
-    { name: 'Ordered', to: { name: "" } },
+    { name: 'Ordered', to: { name: "Orders" } },
     { name: 'Calendar', to: { name: "" } },
     { name: 'Options', to: { name: "" } },
 ]

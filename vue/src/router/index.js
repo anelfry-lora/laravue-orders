@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Food from '../views/foods/index.vue'
+import Foods from '../views/foods/List.vue'
+import Orders from '../views/orders/List.vue'
 import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import DefaultLayout from '../components/layouts/DefaultLayout.vue'
@@ -13,7 +14,8 @@ const routes = [
         component: DefaultLayout,
         meta: { requiresAuth: true },
         children: [
-            { path: '/foods', name: 'Foods', component: Food }
+            { path: '/foods', name: 'Foods', component: Foods },
+            { path: '/orders', name: 'Orders', component: Orders }
         ]
     },
     {
