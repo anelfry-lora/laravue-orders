@@ -60,9 +60,15 @@ const store = createStore({
             state.user.data = {}
             sessionStorage.removeItem('TOKEN');
         },
+        logout: (state) => {
+            state.user.token = null;
+            state.user.data = {}
+            sessionStorage.removeItem('TOKEN');
+        },
         setUser: (state, userData) => {
             state.user.token = userData.token
-            state.user.name = userData.name
+            state.user.data.name = userData.name
+            state.user.data.email = userData.email
             sessionStorage.setItem('TOKEN', userData.token);
         },
     },
