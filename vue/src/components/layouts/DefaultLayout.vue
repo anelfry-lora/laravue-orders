@@ -16,7 +16,7 @@ const navigation = [
     { name: 'Options', to: { name: "" } },
 ]
 
-const singOut = () => {
+const logout = () => {
     store.dispatch('logout')
         .then(() => {
             router.push({
@@ -138,7 +138,7 @@ const singOut = () => {
                         </div>
                     </div>
                     <div class="px-2 mt-3 space-y-1">
-                        <DisclosureButton as="a" @click="singOut()"
+                        <DisclosureButton as="a" @click="logout"
                             class="hover:bg-gray-700 hover:text-red-400 block px-3 py-2 text-base font-medium text-gray-400 rounded-md cursor-pointer">
                             Sing Out
                         </DisclosureButton>
@@ -148,6 +148,8 @@ const singOut = () => {
         </Disclosure>
 
         <router-view></router-view>
+
+        <Notification />
     </div>
 </template>
   
